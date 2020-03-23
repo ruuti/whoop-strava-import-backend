@@ -34,7 +34,7 @@ app.post('/strava/auth', (req, res) => {
   const { code } = req.body
   // Code not present, return 400
   if(!code) return res.status(400).json({})
-  strava.authStrava(code).then(data => {
+  strava.authUserWithCode(code).then(data => {
     res.json({
       access_token: data.access_token
     })
@@ -52,7 +52,7 @@ app.get('/whoop/hr', (req, res) => {
   if(!authorizationHeader) return res.status(401).json({})
   // Not all query params present, return 400
   if(!start || !end || !step || !user_id) return res.status(400).json({})
-  whoop.getHrMetrics(authorizationHeader, start, end, step, user_id).then(data => {
+  whoop.getUserHrMetrics(authorizationHeader, start, end, step, user_id).then(data => {
     res.json(data)
   }).catch((errCode) => {
     res.status(errCode).json({})

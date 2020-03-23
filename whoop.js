@@ -1,9 +1,9 @@
 const request = require('request')
 
-const getHrMetrics = (authorizationHeader, start, end, step, user_id) =>
+const getUserHrMetrics = (authorizationHeader, start, end, step, user_id) =>
   new Promise((resolve, reject) => {
     request.get({
-      url:`https://api-7.whoop.com/users/${ user_id }/metrics/heart_rate?end=${ end }&start=${ start }&step=${ step }`,
+      url: `https://api-7.whoop.com/users/${ user_id }/metrics/heart_rate?end=${ end }&start=${ start }&step=${ step }`,
       headers: {
         'Authorization': authorizationHeader
       }
@@ -16,4 +16,4 @@ const getHrMetrics = (authorizationHeader, start, end, step, user_id) =>
     })
   })
 
-module.exports.getHrMetrics = getHrMetrics
+module.exports.getUserHrMetrics = getUserHrMetrics
